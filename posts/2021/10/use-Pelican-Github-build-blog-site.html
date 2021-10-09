@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../../../theme/stylesheet/style.min.css">
+
+
+  <link id="pygments-light-theme" rel="stylesheet" type="text/css"     href="../../../theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
+  <link rel="icon" href="/images/icon.png" type="image/x-icon">
+
+
+
+
+
+<meta name="author" content="Neo" />
+<meta name="description" content="使用Pelican+Github搭建个人博客网站 官方文档 https://docs.getpelican.com/en/latest/index.html 内部结构 https://docs.getpelican.com/en/stable/internals.html 参考 Run your blog on GitHub Pages with Python -Create a blog with Pelican, a Python-based blogging platform that works well with GitHub. 使用 Pelican 和 GitPages 设置网站的分步指南 用pelican搞一个自己的blog How …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="MakeLove 程序员赚钱指南"/>
+  <meta property="og:title" content="使用Pelican+Github搭建个人博客网站"/>
+  <meta property="og:description" content="使用Pelican+Github搭建个人博客网站 官方文档 https://docs.getpelican.com/en/latest/index.html 内部结构 https://docs.getpelican.com/en/stable/internals.html 参考 Run your blog on GitHub Pages with Python -Create a blog with Pelican, a Python-based blogging platform that works well with GitHub. 使用 Pelican 和 GitPages 设置网站的分步指南 用pelican搞一个自己的blog How …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="../../../posts/2021/10/use-Pelican-Github-build-blog-site.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2021-10-09 20:20:00+08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="../../../author/neo.html">
+  <meta property="article:section" content="Pelican"/>
+  <meta property="og:image" content="">
+
+  <title>MakeLove 程序员赚钱指南 &ndash; 使用Pelican+Github搭建个人博客网站</title>
+
+</head>
+
+<body class="light-theme" >
+  <aside>
+    <div>
+      <a href="../../../">
+        <img src="../../../theme/img/profile.png" alt="" title="">
+      </a>
+
+      <h1>
+        <a href="../../../"></a>
+      </h1>
+
+
+
+      <nav>
+        <ul class="list">
+
+
+
+          <li>
+            <a target="_blank" href="https://github.com/makelove">我的GitHub：makelove</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://space.bilibili.com/180948619">B站：程序员赚钱指南</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/bili.html">bili</a>
+          </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="use-Pelican-Github-build-blog-site">使用Pelican+Github搭建个人博客网站</h1>
+    <p>
+      Posted on 六 09 十月 2021 in <a href="../../../category/pelican.html">Pelican</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>使用Pelican+Github搭建个人博客网站</h2>
+<ul>
+<li>
+<p>官方文档</p>
+<ul>
+<li>https://docs.getpelican.com/en/latest/index.html</li>
+<li>内部结构 https://docs.getpelican.com/en/stable/internals.html</li>
+</ul>
+</li>
+<li>
+<p>参考</p>
+<ul>
+<li><a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">Run your blog on GitHub Pages with Python -Create a blog with Pelican, a Python-based blogging platform that works well with GitHub.</a></li>
+<li><a href="https://antonellocalamea.medium.com/step-by-step-guide-to-setup-a-web-site-using-pelican-and-gitpages-5de976ae44cb">使用 Pelican 和 GitPages 设置网站的分步指南</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/76586862">用pelican搞一个自己的blog</a></li>
+<li><a href="https://janakiev.com/blog/pelican-jupyter/">How to Create Your Data Science Blog with Pelican and Jupyter Notebooks</a></li>
+<li><a href="https://blog.csdn.net/Lv_Victor/article/details/113419739">用Pelican+Github搭建个人博客网站</a><ul>
+<li>善用强大的Makefile自动化脚本文件</li>
+</ul>
+</li>
+<li><a href="http://home.ustc.edu.cn/~hjh18305/space/2018/01/28/blog/pelican/blog-fix-favicon/#1-In-%E2%80%98pelicanconf-py%E2%80%99-set">Favicon not recognized</a></li>
+</ul>
+</li>
+<li>
+<p>主题</p>
+<ul>
+<li>https://github.com/alexandrevicenzi/Flex</li>
+<li>https://github.com/getpelican/pelican-themes/tree/master/bootstrap2-dark</li>
+</ul>
+</li>
+<li>
+<p>安装</p>
+<ul>
+<li>pip install pelican</li>
+<li>pip install markdown</li>
+</ul>
+</li>
+<li>
+<p>命令</p>
+<ul>
+<li>快速创建工程<ul>
+<li>pelican-quickstart</li>
+</ul>
+</li>
+<li>生成HTML<ul>
+<li>pelican content</li>
+</ul>
+</li>
+<li>服务器预览<ul>
+<li>make serve<ul>
+<li>"pelican" -l "/Users/play/CODE/pelican_site/content" -o "/Users/play/CODE/pelican_site/output" -s "/Users/play/CODE/pelican_site/pelicanconf.py" </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>监听修改内容  make devserver</li>
+<li>发布？<ul>
+<li>make publish</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>.py39<span class="o">)</span> pro:pelican_site play$ pelican content
+WARNING: Docutils has no localization <span class="k">for</span> <span class="s1">&#39;zh&#39;</span>. Using <span class="s1">&#39;en&#39;</span> instead.
+WARNING: Watched path does not exist: /Users/play/CODE/pelican_site/content/images
+Done: Processed <span class="m">2</span> articles, <span class="m">0</span> drafts, <span class="m">0</span> pages, <span class="m">0</span> hidden pages and <span class="m">0</span> draft pages <span class="k">in</span> <span class="m">0</span>.57 seconds.
+</code></pre></div>
+
+<ul>
+<li>自动重新加载</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>.py39<span class="o">)</span> pro:demo_plugin1 play$ make devserver
+<span class="s2">&quot;pelican&quot;</span> -lr <span class="s2">&quot;/Users/play/CODE/pelican_site/demo_plugin1/content&quot;</span> -o <span class="s2">&quot;/Users/play/CODE/pelican_site/demo_plugin1/output&quot;</span> -s <span class="s2">&quot;/Users/play/CODE/pelican_site/demo_plugin1/pelicanconf.py&quot;</span> 
+  --- AutoReload Mode: Monitoring <span class="sb">`</span>content<span class="sb">`</span>, <span class="sb">`</span>theme<span class="sb">`</span> and <span class="sb">`</span>settings<span class="sb">`</span> <span class="k">for</span> changes. ---
+Docutils has no localization <span class="k">for</span> <span class="s1">&#39;zh&#39;</span>. Using <span class="s1">&#39;en&#39;</span> instead.
+
+Serving site at: http://127.0.0.1:8000 - Tap CTRL-C to stop
+Watched path does not exist: /Users/play/CODE/pelican_site/demo_plugin1/content/images
+
+-&gt; Modified: settings, content, theme. re-generating...
+Done: Processed <span class="m">2</span> articles, <span class="m">0</span> drafts, <span class="m">0</span> pages, <span class="m">0</span> hidden pages and <span class="m">0</span> draft pages <span class="k">in</span> <span class="m">0</span>.28 seconds.
+
+<span class="c1">#修改后</span>
+-&gt; Modified: content. re-generating...
+Done: Processed <span class="m">2</span> articles, <span class="m">0</span> drafts, <span class="m">0</span> pages, <span class="m">0</span> hidden pages and <span class="m">0</span> draft pages <span class="k">in</span> <span class="m">0</span>.20 seconds.
+</code></pre></div>
+
+<h2>插件 plugins</h2>
+<ul>
+<li>文档<ul>
+<li>https://docs.getpelican.com/en/latest/plugins.html</li>
+<li>https://github.com/getpelican/pelican-plugins</li>
+<li>https://docs.getpelican.com/en/stable/internals.html</li>
+</ul>
+</li>
+<li>参考<ul>
+<li>好文章 <a href="http://adamcot.com/posts/2018/02/building-pelican-plugins-i/">Building Plugins in Pelican Part I - Basics</a><ul>
+<li>http://adamcot.com/posts/2018/02/building-pelican-plugins-ii/</li>
+<li>http://adamcot.com/posts/2018/02/building-pelican-plugins-iii/</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " MakeLove 程序员赚钱指南 ",
+  "url" : "../../..",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+
+</html>
