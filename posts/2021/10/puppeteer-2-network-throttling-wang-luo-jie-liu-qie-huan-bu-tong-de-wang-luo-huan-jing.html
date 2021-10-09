@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../../../theme/stylesheet/style.min.css">
+
+
+  <link id="pygments-light-theme" rel="stylesheet" type="text/css"     href="../../../theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
+  <link rel="icon" href="/images/icon.png" type="image/x-icon">
+
+
+
+
+
+<meta name="author" content="Neo" />
+<meta name="description" content="参考 Network throttling in Puppeteer Javascript网络状态获取与监听 使用Puppeteer自动化Web性能测试🎪 - JavaScript开发社区 网络节流 Chrome 浏览器 DevTools有个功能是网络节流，非常有用。 模拟不同的网络环境，预设了Fast 3G，Slow 3G，offline离线 也可以自己设定，下载速率，上传速率，延迟时间 Puppeteer支持 let NETWORK_PRESETS = { &#39;GPRS&#39;: { &#39;offline&#39;: false, &#39;downloadThroughput&#39;: 50 * 1024 / 8, &#39;uploadThroughput&#39;: 20 * 1024 / 8, &#39;latency&#39;: 500 }, &#39;Regular2G&#39;: { &#39;offline&#39;: false, &#39;downloadThroughput&#39;: 250 * 1024 / 8, &#39;uploadThroughput&#39;: 50 * 1024 / 8 …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="MakeLove 程序员赚钱指南"/>
+  <meta property="og:title" content="Puppeteer 2 Network throttling 网络节流,切换不同的网络环境"/>
+  <meta property="og:description" content="参考 Network throttling in Puppeteer Javascript网络状态获取与监听 使用Puppeteer自动化Web性能测试🎪 - JavaScript开发社区 网络节流 Chrome 浏览器 DevTools有个功能是网络节流，非常有用。 模拟不同的网络环境，预设了Fast 3G，Slow 3G，offline离线 也可以自己设定，下载速率，上传速率，延迟时间 Puppeteer支持 let NETWORK_PRESETS = { &#39;GPRS&#39;: { &#39;offline&#39;: false, &#39;downloadThroughput&#39;: 50 * 1024 / 8, &#39;uploadThroughput&#39;: 20 * 1024 / 8, &#39;latency&#39;: 500 }, &#39;Regular2G&#39;: { &#39;offline&#39;: false, &#39;downloadThroughput&#39;: 250 * 1024 / 8, &#39;uploadThroughput&#39;: 50 * 1024 / 8 …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="../../../posts/2021/10/puppeteer-2-network-throttling-wang-luo-jie-liu-qie-huan-bu-tong-de-wang-luo-huan-jing.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2021-10-09 14:47:00+08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="../../../author/neo.html">
+  <meta property="article:section" content="Puppeteer"/>
+  <meta property="og:image" content="">
+
+  <title>MakeLove 程序员赚钱指南 &ndash; Puppeteer 2 Network throttling 网络节流,切换不同的网络环境</title>
+
+</head>
+
+<body class="light-theme" >
+  <aside>
+    <div>
+      <a href="../../../">
+        <img src="../../../theme/img/profile.png" alt="" title="">
+      </a>
+
+      <h1>
+        <a href="../../../"></a>
+      </h1>
+
+
+
+      <nav>
+        <ul class="list">
+
+
+
+          <li>
+            <a target="_blank" href="https://github.com/makelove">我的GitHub：makelove</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://space.bilibili.com/180948619">B站：程序员赚钱指南</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/bili.html">bili</a>
+          </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="puppeteer-2-network-throttling-wang-luo-jie-liu-qie-huan-bu-tong-de-wang-luo-huan-jing">Puppeteer 2 Network throttling 网络节流,切换不同的网络环境</h1>
+    <p>
+      Posted on 六 09 十月 2021 in <a href="../../../category/puppeteer.html">Puppeteer</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <ul>
+<li>参考<ul>
+<li><a href="https://fdalvi.github.io/blog/2018-02-05-puppeteer-network-throttle/">Network throttling in Puppeteer</a></li>
+<li><a href="https://www.deanhan.cn/network-effective-type.html">Javascript网络状态获取与监听 </a></li>
+<li><a href="https://www.weiceyan.com/addyosmani-puppeteer-webperf.html">使用Puppeteer自动化Web性能测试🎪 - JavaScript开发社区 </a></li>
+</ul>
+</li>
+</ul>
+<h2>网络节流</h2>
+<p>Chrome 浏览器 DevTools有个功能是网络节流，非常有用。
+模拟不同的网络环境，预设了Fast 3G，Slow 3G，offline离线
+也可以自己设定，下载速率，上传速率，延迟时间</p>
+<h2>Puppeteer支持</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">NETWORK_PRESETS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;GPRS&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">50</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">20</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">500</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;Regular2G&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">250</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">50</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">300</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;Good2G&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">450</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">150</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">150</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;Regular3G&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">750</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">250</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">100</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;Good3G&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">750</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">40</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;Regular4G&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">4</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">3</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">20</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;DSL&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">2</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">1</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">5</span>
+  <span class="p">},</span>
+  <span class="s1">&#39;WiFi&#39;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">30</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">15</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">2</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">puppeteer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;puppeteer&#39;</span><span class="p">)</span>
+
+<span class="nx">puppeteer</span><span class="p">.</span><span class="nx">launch</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="k">async</span> <span class="nx">browser</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Create a new tab</span>
+  <span class="kd">const</span> <span class="nx">page</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">newPage</span><span class="p">()</span>
+
+  <span class="c1">// Connect to Chrome DevTools</span>
+  <span class="kd">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">target</span><span class="p">().</span><span class="nx">createCDPSession</span><span class="p">()</span>
+
+  <span class="c1">// Set throttling property</span>
+  <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Network.emulateNetworkConditions&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">200</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">200</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
+    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">20</span>
+  <span class="p">})</span>
+  <span class="c1">//或者</span>
+   <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Network.emulateNetworkConditions&#39;</span><span class="p">,</span><span class="nx">NETWORK_PRESETS</span><span class="p">[</span><span class="s1">&#39;Good3G&#39;</span><span class="p">])</span>
+
+  <span class="c1">// Navigate and take a screenshot</span>
+  <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">goto</span><span class="p">(</span><span class="s1">&#39;https://fdalvi.github.io&#39;</span><span class="p">)</span>
+  <span class="k">await</span> <span class="nx">page</span><span class="p">.</span><span class="nx">screenshot</span><span class="p">({</span><span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;screenshot.png&#39;</span><span class="p">})</span>
+  <span class="k">await</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " MakeLove 程序员赚钱指南 ",
+  "url" : "../../..",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+
+</html>
