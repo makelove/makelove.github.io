@@ -89,6 +89,64 @@
 
 <article>
   <header>
+    <h2><a href="../posts/2021/10/Puppeteer-connect-chrome-already-open.html#Puppeteer-connect-chrome-already-open">PUPPETEER连接已经打开的Chrome电脑桌面</a></h2>
+    <p>
+      Posted on 日 10 十月 2021 in <a href="../category/puppeteer.html">Puppeteer</a>
+
+
+    </p>
+  </header>
+  <div>
+      <h1>PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号</h1>
+<ul>
+<li>
+<p>视频 <a href="https://www.bilibili.com/video/BV1rF411Y7U4/">【编程】PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号</a></p>
+</li>
+<li>
+<p>参考</p>
+<ul>
+<li>https://medium.com/@jaredpotter1/connecting-puppeteer-to-existing-chrome-window-8a10828149e0</li>
+</ul>
+</li>
+<li>
+<p>问题</p>
+<ul>
+<li>总是打开一个新的、独立的、隔离的 Chrome 实例，而无法访问 任何现有的用户状态</li>
+<li>一般都是打开 Chronium</li>
+</ul>
+</li>
+<li>
+<p>重点</p>
+<ul>
+<li>打开remote-debugging-port远程调试端口</li>
+</ul>
+</li>
+</ul>
+<h2>命令行</h2>
+<ul>
+<li>
+<p>只能先打开Chrome</p>
+<ul>
+<li>
+<p>/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')</p>
+<ul>
+<li>会创建临时目录</li>
+</ul>
+</li>
+<li>
+<p>使用已经安装的Chrome浏览器，平时正常使用</p>
+<ul>
+<li>/Applications/Google …</li></ul></li></ul></li></ul>
+        <br>
+        <a class="btn"
+           href="../posts/2021/10/Puppeteer-connect-chrome-already-open.html#Puppeteer-connect-chrome-already-open">
+          Continue reading
+        </a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
     <h2><a href="../posts/2021/10/use-Pelican-Github-build-blog-site.html#use-Pelican-Github-build-blog-site">使用Pelican+Github搭建个人博客网站</a></h2>
     <p>
       Posted on 六 09 十月 2021 in <a href="../category/pelican.html">Pelican</a>
@@ -100,6 +158,9 @@
       <h2>使用Pelican+Github搭建个人博客网站</h2>
 <ul>
 <li>
+<p>视频 <a href="https://www.bilibili.com/video/BV17f4y1g7bm/">【编程】使用Pelican+Github搭建个人博客网站，免费</a></p>
+</li>
+<li>
 <p>官方文档</p>
 <ul>
 <li>https://docs.getpelican.com/en/latest/index.html</li>
@@ -110,9 +171,7 @@
 <p>参考</p>
 <ul>
 <li><a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">Run your blog on GitHub Pages with Python -Create a blog with Pelican, a Python-based blogging platform that works well with GitHub.</a></li>
-<li><a href="https://antonellocalamea.medium.com/step-by-step-guide-to-setup-a-web-site-using-pelican-and-gitpages-5de976ae44cb">使用 Pelican 和 GitPages 设置网站的分步指南</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/76586862">用pelican搞一个自己的blog</a></li>
-<li><a href="https://janakiev.com/blog/pelican-jupyter/">How …</a></li></ul></li></ul>
+<li><a href="https://antonellocalamea.medium.com/step-by-step-guide-to-setup-a-web-site-using-pelican-and-gitpages-5de976ae44cb">使用 Pelican …</a></li></ul></li></ul>
         <br>
         <a class="btn"
            href="../posts/2021/10/use-Pelican-Github-build-blog-site.html#use-Pelican-Github-build-blog-site">

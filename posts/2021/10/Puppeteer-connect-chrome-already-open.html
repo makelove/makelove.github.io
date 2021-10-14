@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../../../theme/stylesheet/style.min.css">
+
+
+  <link id="pygments-light-theme" rel="stylesheet" type="text/css"     href="../../../theme/pygments/github.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="../../../theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
+  <link rel="icon" href="/images/icon.png" type="image/x-icon">
+
+
+
+
+
+<meta name="author" content="Neo" />
+<meta name="description" content="PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号 视频 【编程】PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号 参考 https://medium.com/@jaredpotter1/connecting-puppeteer-to-existing-chrome-window-8a10828149e0 问题 总是打开一个新的、独立的、隔离的 Chrome 实例，而无法访问 任何现有的用户状态 一般都是打开 Chronium 重点 打开remote-debugging-port远程调试端口 命令行 只能先打开Chrome /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t &#39;chrome-remote_data_dir&#39;) 会创建临时目录 使用已经安装的Chrome浏览器，平时正常使用 /Applications/Google …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="MakeLove 程序员赚钱指南"/>
+  <meta property="og:title" content="PUPPETEER连接已经打开的Chrome电脑桌面"/>
+  <meta property="og:description" content="PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号 视频 【编程】PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号 参考 https://medium.com/@jaredpotter1/connecting-puppeteer-to-existing-chrome-window-8a10828149e0 问题 总是打开一个新的、独立的、隔离的 Chrome 实例，而无法访问 任何现有的用户状态 一般都是打开 Chronium 重点 打开remote-debugging-port远程调试端口 命令行 只能先打开Chrome /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t &#39;chrome-remote_data_dir&#39;) 会创建临时目录 使用已经安装的Chrome浏览器，平时正常使用 /Applications/Google …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="../../../posts/2021/10/Puppeteer-connect-chrome-already-open.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2021-10-10 14:47:00+08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="../../../author/neo.html">
+  <meta property="article:section" content="Puppeteer"/>
+  <meta property="og:image" content="/images/love.jpeg">
+
+  <title>MakeLove 程序员赚钱指南 &ndash; PUPPETEER连接已经打开的Chrome电脑桌面</title>
+
+</head>
+
+<body class="light-theme" >
+  <aside>
+    <div>
+      <a href="../../../">
+        <img src="/images/love.jpeg" alt="" title="">
+      </a>
+
+      <h1>
+        <a href="../../../"></a>
+      </h1>
+
+
+
+      <nav>
+        <ul class="list">
+
+
+
+          <li>
+            <a target="_blank" href="https://github.com/makelove">我的GitHub：makelove</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://space.bilibili.com/180948619">B站：程序员赚钱指南</a>
+          </li>
+          <li>
+            <a target="_self" href="/category/bili.html">bili</a>
+          </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="Puppeteer-connect-chrome-already-open">PUPPETEER连接已经打开的Chrome电脑桌面</h1>
+    <p>
+      Posted on 日 10 十月 2021 in <a href="../../../category/puppeteer.html">Puppeteer</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号</h1>
+<ul>
+<li>
+<p>视频 <a href="https://www.bilibili.com/video/BV1rF411Y7U4/">【编程】PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号</a></p>
+</li>
+<li>
+<p>参考</p>
+<ul>
+<li>https://medium.com/@jaredpotter1/connecting-puppeteer-to-existing-chrome-window-8a10828149e0</li>
+</ul>
+</li>
+<li>
+<p>问题</p>
+<ul>
+<li>总是打开一个新的、独立的、隔离的 Chrome 实例，而无法访问 任何现有的用户状态</li>
+<li>一般都是打开 Chronium</li>
+</ul>
+</li>
+<li>
+<p>重点</p>
+<ul>
+<li>打开remote-debugging-port远程调试端口</li>
+</ul>
+</li>
+</ul>
+<h2>命令行</h2>
+<ul>
+<li>
+<p>只能先打开Chrome</p>
+<ul>
+<li>
+<p>/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')</p>
+<ul>
+<li>会创建临时目录</li>
+</ul>
+</li>
+<li>
+<p>使用已经安装的Chrome浏览器，平时正常使用</p>
+<ul>
+<li>/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check</li>
+</ul>
+</li>
+<li>
+<p>命令行打印</p>
+<ul>
+<li>DevTools listening on ws://localhost:9222/devtools/browser/41a0b5f0–6747–446a-91b6–5ba30c87e951</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Windows 快捷方式</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;C:\Program Files (x86)\Google\Chrome\Application\chrome.exe&quot;</span> <span class="o">--</span><span class="nx">remote</span><span class="o">-</span><span class="nx">debugging</span><span class="o">-</span><span class="nx">port</span><span class="o">=</span><span class="mf">9222</span>
+</code></pre></div>
+
+<ul>
+<li>
+<p>然后 打开 http://127.0.0.1:9222/json/version</p>
+<ul>
+<li>获取wsChromeEndpointurl</li>
+</ul>
+</li>
+<li>
+<p>代码</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">wsChromeEndpointurl</span> <span class="o">=</span> <span class="s1">&#39;ws://localhost:9222/devtools/browser/41a0b5f0–6747–446a-91b6–5ba30c87e951&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">puppeteer</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span>
+    <span class="nx">browserWSEndpoint</span><span class="o">:</span> <span class="nx">wsChromeEndpointurl</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " MakeLove 程序员赚钱指南 ",
+  "url" : "../../..",
+  "image": "/images/love.jpeg",
+  "description": ""
+}
+</script>
+
+</body>
+
+</html>
