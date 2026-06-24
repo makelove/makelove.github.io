@@ -4,33 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube 播放列表</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f0f0f; color: #f1f1f1; min-height: 100vh; }
-        .container { max-width: 800px; margin: 0 auto; padding: 24px 16px; }
-        h1 { text-align: center; margin-bottom: 24px; font-size: 1.5rem; }
-        .add-form { display: flex; gap: 8px; margin-bottom: 24px; }
-        .add-form input { flex: 1; padding: 10px 12px; border: 1px solid #333; border-radius: 8px; background: #1a1a1a; color: #f1f1f1; font-size: 14px; outline: none; }
-        .add-form input:focus { border-color: #3ea6ff; }
-        .add-form input::placeholder { color: #666; }
-        button { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: opacity .2s; }
-        button:hover { opacity: 0.85; }
-        button:disabled { opacity: 0.4; cursor: not-allowed; }
-        .btn-add { background: #3ea6ff; color: #000; }
-        .btn-pop { background: #ff4e4e; color: #fff; }
-        .btn-refresh { background: #333; color: #f1f1f1; }
-        .toolbar { display: flex; gap: 8px; margin-bottom: 16px; }
-        .list { display: flex; flex-direction: column; gap: 8px; }
-        .item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #1a1a1a; border-radius: 10px; text-decoration: none; color: #f1f1f1; transition: background .2s; }
-        .item:hover { background: #272727; }
-        .thumb { width: 120px; height: 68px; border-radius: 6px; object-fit: cover; background: #333; flex-shrink: 0; }
-        .title { font-size: 14px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .empty { text-align: center; color: #666; padding: 48px 0; }
-        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); padding: 10px 24px; border-radius: 8px; font-size: 14px; z-index: 999; animation: fadeInOut 2s ease; }
-        .toast-ok { background: #2e7d32; color: #fff; }
-        .toast-err { background: #c62828; color: #fff; }
-        @keyframes fadeInOut { 0%{opacity:0;transform:translateX(-50%) translateY(-10px)} 15%{opacity:1;transform:translateX(-50%) translateY(0)} 80%{opacity:1} 100%{opacity:0} }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
@@ -46,90 +20,6 @@
     </div>
     <div class="list" id="list"></div>
 </div>
-<script>
-const API = 'https://play4fun.pythonanywhere.com/ytbl';
-
-function toast(msg, ok = true) {
-    const el = document.createElement('div');
-    el.className = 'toast ' + (ok ? 'toast-ok' : 'toast-err');
-    el.textContent = msg;
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 2200);
-}
-
-function videoId(url) {
-    try { return new URL(url).searchParams.get('v'); } catch { return ''; }
-}
-
-function thumbUrl(url) {
-    const id = videoId(url);
-    return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : '';
-}
-
-function renderList(data) {
-    const list = document.getElementById('list');
-    if (!data.length) {
-        list.innerHTML = '<div class="empty">列表为空</div>';
-        return;
-    }
-    list.innerHTML = data.map(item => {
-        const thumb = thumbUrl(item.url);
-        return `<a class="item" href="${item.url}" target="_blank" rel="noopener">
-            ${thumb ? `<img class="thumb" src="${thumb}" loading="lazy">` : '<div class="thumb"></div>'}
-            <div class="title">${item.title}</div>
-        </a>`;
-    }).join('');
-}
-
-async function fetchList() {
-    try {
-        const res = await fetch(API + '/quere_list');
-        const json = await res.json();
-        renderList(json.data || []);
-    } catch (e) {
-        toast('获取列表失败: ' + e.message, false);
-    }
-}
-
-document.getElementById('addForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    const title = document.getElementById('inputTitle').value.trim();
-    const url = document.getElementById('inputUrl').value.trim();
-    if (!title || !url) return;
-    try {
-        const res = await fetch(API + '/quere_add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, url })
-        });
-        const json = await res.json();
-        toast(json.message || '添加成功');
-        document.getElementById('inputTitle').value = '';
-        document.getElementById('inputUrl').value = '';
-        fetchList();
-    } catch (e) {
-        toast('添加失败: ' + e.message, false);
-    }
-});
-
-document.getElementById('btnPop').addEventListener('click', async () => {
-    try {
-        const res = await fetch(API + '/quere_pop');
-        const json = await res.json();
-        if (json.data) {
-            toast(`已取出: ${json.data.title}`);
-        } else {
-            toast('列表为空', false);
-        }
-        fetchList();
-    } catch (e) {
-        toast('取出失败: ' + e.message, false);
-    }
-});
-
-document.getElementById('btnRefresh').addEventListener('click', fetchList);
-
-fetchList();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
