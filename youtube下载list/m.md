@@ -40,3 +40,5 @@ GET /quere_pop
     "status": 200
 }
 ```
+运行，看效果
+python3 -m http.server 8000 & open http://localhost:8000/index.html
