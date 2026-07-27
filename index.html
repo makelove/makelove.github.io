@@ -1,326 +1,347 @@
-
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程序员分享人生</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap"
-    rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
 
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-  <link id="pygments-light-theme" rel="stylesheet" type="text/css"     href="./theme/pygments/github.min.css">
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+        }
 
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
 
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
 
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
 
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
 
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-  <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon">
-  <link rel="icon" href="/images/icon.png" type="image/x-icon">
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
 
+        .info-list {
+            list-style: none;
+        }
 
+        .info-list li {
+            padding: 0.4rem 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
 
+        .info-list li:last-child {
+            border-bottom: none;
+        }
 
+        .info-list .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
 
-  <meta name="author" content="Neo" />
-  <meta name="description" content="" />
-  <meta property="og:site_name" content="MakeLove 程序员赚钱指南"/>
-  <meta property="og:type" content="blog"/>
-  <meta property="og:title" content="MakeLove 程序员赚钱指南"/>
-  <meta property="og:description" content=""/>
-  <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="."/>
-  <meta property="og:image" content="/images/love.jpeg">
+        .info-list .value {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
 
-  <title>MakeLove 程序员赚钱指南</title>
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
 
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .link-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .link-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-box .card-title {
+            color: white;
+            justify-content: center;
+        }
+
+        .contact-box .card-title::before {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .wechat {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .current-site {
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            word-break: break-all;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-list li {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
-<body class="light-theme" >
-  <aside>
-    <div>
-      <a href="./">
-        <img src="/images/love.jpeg" alt="" title="">
-      </a>
+<body>
+    <div class="container">
+        <header>
+            <h1>程序员分享人生</h1>
+            <p>分享技术，记录生活</p>
+        </header>
 
-      <h1>
-        <a href="./"></a>
-      </h1>
+        <section class="card">
+            <div class="card-title">当前网站</div>
+            <a href="https://dark.net.cn/" target="_blank" class="current-site">
+                https://dark.net.cn/
+            </a>
+        </section>
 
+        <section class="card">
+            <div class="card-title">GitHub 仓库</div>
+            <div class="links">
+                <a href="https://github.com/makelove" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.7-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.578 9.578 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    makelove
+                </a>
+                <div style="color: var(--text-secondary); font-size: 0.8rem; padding-left: 0.25rem;">排前的仓库 repo</div>
+            </div>
+        </section>
 
+        <section class="card">
+            <div class="card-title">B站</div>
+            <div class="links">
+                <a href="https://space.bilibili.com/180948619" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M10.5 0h3v7.5H18V24h-3V12H9v12H6V7.5h7.5V0zm3 2.25V6h-3V2.25h3zm0 9H15v10.5h-1.5V11.25zm-4.5 0H10.5V24H9V11.25zm-3 0H7.5V24H6V11.25z" />
+                    </svg>
+                    程序员分享人生 · LV6
+                </a>
+            </div>
 
-      <nav>
-        <ul class="list">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">10,571</span>
+                    <span class="stat-label">粉丝总数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">2,524</span>
+                    <span class="stat-label">视频稿件</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">674万</span>
+                    <span class="stat-label">播放量</span>
+                </div>
+            </div>
 
+            <ul class="info-list">
+                <li>
+                    <span class="label">评论</span>
+                    <span class="value">16,683</span>
+                </li>
+                <li>
+                    <span class="label">弹幕</span>
+                    <span class="value">2,745</span>
+                </li>
+                <li>
+                    <span class="label">点赞</span>
+                    <span class="value">106,005</span>
+                </li>
+                <li>
+                    <span class="label">分享</span>
+                    <span class="value">11,749</span>
+                </li>
+                <li>
+                    <span class="label">收藏</span>
+                    <span class="value">56,958</span>
+                </li>
+                <li>
+                    <span class="label">投币</span>
+                    <span class="value">7,907</span>
+                </li>
+            </ul>
+        </section>
 
+        <section class="contact-box">
+            <div class="card-title">联系我</div>
+            <div class="wechat">微信:  do8it8</div>
+        </section>
 
-          <li>
-            <a target="_blank" href="https://github.com/makelove">我的GitHub：makelove</a>
-          </li>
-          <li>
-            <a target="_blank" href="https://space.bilibili.com/180948619">B站：程序员赚钱指南</a>
-          </li>
-          <li>
-            <a target="_self" href="/category/bili.html">bili</a>
-          </li>
-        </ul>
-      </nav>
+        <section class="card">
+            <div class="card-title">代码 Demo 演示</div>
+            <div class="links">
+                <a href="https://bilibili.pythonanywhere.com/" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    bilibili.pythonanywhere.com
+                </a>
+                <a href="https://fastapidemo.dark.net.cn" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    fastapidemo.dark.net.cn
+                </a>
+                <a href="https://daihuo.dark.net.cn" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    daihuo.dark.net.cn
+                </a>
+            </div>
+        </section>
 
-      <ul class="social">
-      </ul>
+        <footer style="text-align: center; margin-top: 3rem; color: var(--text-secondary); font-size: 0.8rem;">
+            © 2026 程序员分享人生
+        </footer>
     </div>
-
-  </aside>
-  <main>
-
-
-
-
-<article>
-  <header>
-    <h2><a href="./posts/2021/10/Puppeteer-connect-chrome-already-open.html#Puppeteer-connect-chrome-already-open">PUPPETEER连接已经打开的Chrome电脑桌面</a></h2>
-    <p>
-      Posted on 日 10 十月 2021 in <a href="./category/puppeteer.html">Puppeteer</a>
-
-
-    </p>
-  </header>
-  <div>
-      <h1>PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号</h1>
-<ul>
-<li>
-<p>视频 <a href="https://www.bilibili.com/video/BV1rF411Y7U4/">【编程】PUPPETEER 连接已经打开的Chrome电脑桌面，不需要重新打开或登录账号</a></p>
-</li>
-<li>
-<p>参考</p>
-<ul>
-<li>https://medium.com/@jaredpotter1/connecting-puppeteer-to-existing-chrome-window-8a10828149e0</li>
-</ul>
-</li>
-<li>
-<p>问题</p>
-<ul>
-<li>总是打开一个新的、独立的、隔离的 Chrome 实例，而无法访问 任何现有的用户状态</li>
-<li>一般都是打开 Chronium</li>
-</ul>
-</li>
-<li>
-<p>重点</p>
-<ul>
-<li>打开remote-debugging-port远程调试端口</li>
-</ul>
-</li>
-</ul>
-<h2>命令行</h2>
-<ul>
-<li>
-<p>只能先打开Chrome</p>
-<ul>
-<li>
-<p>/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --no-first-run --no-default-browser-check --user-data-dir=$(mktemp -d -t 'chrome-remote_data_dir')</p>
-<ul>
-<li>会创建临时目录</li>
-</ul>
-</li>
-<li>
-<p>使用已经安装的Chrome浏览器，平时正常使用</p>
-<ul>
-<li>/Applications/Google …</li></ul></li></ul></li></ul>
-        <br>
-        <a class="btn"
-           href="./posts/2021/10/Puppeteer-connect-chrome-already-open.html#Puppeteer-connect-chrome-already-open">
-          Continue reading
-        </a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./posts/2021/10/use-Pelican-Github-build-blog-site.html#use-Pelican-Github-build-blog-site">使用Pelican+Github搭建个人博客网站</a></h2>
-    <p>
-      Posted on 六 09 十月 2021 in <a href="./category/pelican.html">Pelican</a>
-
-
-    </p>
-  </header>
-  <div>
-      <h2>使用Pelican+Github搭建个人博客网站</h2>
-<ul>
-<li>
-<p>视频 <a href="https://www.bilibili.com/video/BV17f4y1g7bm/">【编程】使用Pelican+Github搭建个人博客网站，免费</a></p>
-</li>
-<li>
-<p>官方文档</p>
-<ul>
-<li>https://docs.getpelican.com/en/latest/index.html</li>
-<li>内部结构 https://docs.getpelican.com/en/stable/internals.html</li>
-</ul>
-</li>
-<li>
-<p>参考</p>
-<ul>
-<li><a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">Run your blog on GitHub Pages with Python -Create a blog with Pelican, a Python-based blogging platform that works well with GitHub.</a></li>
-<li><a href="https://antonellocalamea.medium.com/step-by-step-guide-to-setup-a-web-site-using-pelican-and-gitpages-5de976ae44cb">使用 Pelican …</a></li></ul></li></ul>
-        <br>
-        <a class="btn"
-           href="./posts/2021/10/use-Pelican-Github-build-blog-site.html#use-Pelican-Github-build-blog-site">
-          Continue reading
-        </a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./posts/2021/10/puppeteer-2-network-throttling-wang-luo-jie-liu-qie-huan-bu-tong-de-wang-luo-huan-jing.html#puppeteer-2-network-throttling-wang-luo-jie-liu-qie-huan-bu-tong-de-wang-luo-huan-jing">Puppeteer 2 Network throttling 网络节流,切换不同的网络环境</a></h2>
-    <p>
-      Posted on 六 09 十月 2021 in <a href="./category/puppeteer.html">Puppeteer</a>
-
-
-    </p>
-  </header>
-  <div>
-      <ul>
-<li>参考<ul>
-<li><a href="https://fdalvi.github.io/blog/2018-02-05-puppeteer-network-throttle/">Network throttling in Puppeteer</a></li>
-<li><a href="https://www.deanhan.cn/network-effective-type.html">Javascript网络状态获取与监听 </a></li>
-<li><a href="https://www.weiceyan.com/addyosmani-puppeteer-webperf.html">使用Puppeteer自动化Web性能测试🎪 - JavaScript开发社区 </a></li>
-</ul>
-</li>
-</ul>
-<h2>网络节流</h2>
-<p>Chrome 浏览器 DevTools有个功能是网络节流，非常有用。
-模拟不同的网络环境，预设了Fast 3G，Slow 3G，offline离线
-也可以自己设定，下载速率，上传速率，延迟时间</p>
-<h2>Puppeteer支持</h2>
-<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nx">NETWORK_PRESETS</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;GPRS&#39;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">50</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
-    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">20</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
-    <span class="s1">&#39;latency&#39;</span><span class="o">:</span> <span class="mf">500</span>
-  <span class="p">},</span>
-  <span class="s1">&#39;Regular2G&#39;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s1">&#39;offline&#39;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s1">&#39;downloadThroughput&#39;</span><span class="o">:</span> <span class="mf">250</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8</span><span class="p">,</span>
-    <span class="s1">&#39;uploadThroughput&#39;</span><span class="o">:</span> <span class="mf">50</span> <span class="o">*</span> <span class="mf">1024</span> <span class="o">/</span> <span class="mf">8 …</span></code></pre></div>
-        <br>
-        <a class="btn"
-           href="./posts/2021/10/puppeteer-2-network-throttling-wang-luo-jie-liu-qie-huan-bu-tong-de-wang-luo-huan-jing.html#puppeteer-2-network-throttling-wang-luo-jie-liu-qie-huan-bu-tong-de-wang-luo-huan-jing">
-          Continue reading
-        </a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./posts/2010/12/bzhan-dong-tai.html#bzhan-dong-tai">B站动态</a></h2>
-    <p>
-      Posted on 五 03 十二月 2010 in <a href="./category/bili.html">bili</a>
-
-
-    </p>
-  </header>
-  <div>
-      <p>Following is a review of my favorite mechanical keyboard.</p>
-<h2>我的B站</h2>
-<ul>
-<li>1</li>
-<li>2<ul>
-<li>3</li>
-<li>4</li>
-</ul>
-</li>
-</ul>
-<h2>标题2</h2>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./posts/2010/12/my-first-review.html#my-first-review">My First Review</a></h2>
-    <p>
-      Posted on 五 03 十二月 2010 in <a href="./category/review.html">Review</a>
-
-          &#8226; Tagged with
-              <a href="./tag/a1.html">a1</a>,              <a href="./tag/b2.html">b2</a>,              <a href="./tag/c3.html">c3</a>
-    </p>
-  </header>
-  <div>
-      <p>Following is a review of my favorite mechanical keyboard.</p>
-<h2>标题1</h2>
-<ul>
-<li>1</li>
-<li>2<ul>
-<li>3</li>
-<li>4</li>
-</ul>
-</li>
-</ul>
-<h2>标题2</h2>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="./posts/2010/12/my-first-review22.html#my-first-review22">My First Review22</a></h2>
-    <p>
-      Posted on 五 03 十二月 2010 in <a href="./category/tbk.html">tbk</a>
-
-
-    </p>
-  </header>
-  <div>
-      <p>Following is a review of my favorite mechanical keyboard.</p>
-<h2>标题1</h2>
-<ul>
-<li>1</li>
-<li>2<ul>
-<li>3</li>
-<li>4</li>
-</ul>
-</li>
-</ul>
-<h2>标题2</h2>
-  </div>
-</article>
-
-  <div class="pagination">
-  </div>
-
-
-
-    <footer>
-<p>&copy;  </p>
-<p>
-Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
-
-
-
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " MakeLove 程序员赚钱指南 ",
-  "url" : ".",
-  "image": "/images/love.jpeg",
-  "description": ""
-}
-</script>
-
 </body>
 
 </html>
