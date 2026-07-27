@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程序员分享人生</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 0.4rem 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .info-list .value {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .link-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .link-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-box .card-title {
+            color: white;
+            justify-content: center;
+        }
+
+        .contact-box .card-title::before {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .wechat {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .current-site {
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            word-break: break-all;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info-list li {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>程序员分享人生</h1>
+            <p>分享技术，记录生活</p>
+        </header>
+
+        <section class="card">
+            <div class="card-title">当前网站</div>
+            <a href="https://dark.net.cn/" target="_blank" class="current-site">
+                https://dark.net.cn/
+            </a>
+        </section>
+
+        <section class="card">
+            <div class="card-title">GitHub 仓库</div>
+            <div class="links">
+                <a href="https://github.com/makelove" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.7-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.578 9.578 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                    </svg>
+                    makelove
+                </a>
+                <div style="color: var(--text-secondary); font-size: 0.8rem; padding-left: 0.25rem;">排前的仓库 repo</div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">B站</div>
+            <div class="links">
+                <a href="https://space.bilibili.com/180948619" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10.5 0h3v7.5H18V24h-3V12H9v12H6V7.5h7.5V0zm3 2.25V6h-3V2.25h3zm0 9H15v10.5h-1.5V11.25zm-4.5 0H10.5V24H9V11.25zm-3 0H7.5V24H6V11.25z"/>
+                    </svg>
+                    程序员分享人生 · LV6
+                </a>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value">10,571</span>
+                    <span class="stat-label">粉丝总数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">2,524</span>
+                    <span class="stat-label">视频稿件</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">674万</span>
+                    <span class="stat-label">播放量</span>
+                </div>
+            </div>
+
+            <ul class="info-list">
+                <li>
+                    <span class="label">评论</span>
+                    <span class="value">16,683</span>
+                </li>
+                <li>
+                    <span class="label">弹幕</span>
+                    <span class="value">2,745</span>
+                </li>
+                <li>
+                    <span class="label">点赞</span>
+                    <span class="value">106,005</span>
+                </li>
+                <li>
+                    <span class="label">分享</span>
+                    <span class="value">11,749</span>
+                </li>
+                <li>
+                    <span class="label">收藏</span>
+                    <span class="value">56,958</span>
+                </li>
+                <li>
+                    <span class="label">投币</span>
+                    <span class="value">7,907</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="contact-box">
+            <div class="card-title">联系我</div>
+            <div class="wechat">do8it8</div>
+        </section>
+
+        <section class="card">
+            <div class="card-title">代码 Demo 演示</div>
+            <div class="links">
+                <a href="https://bilibili.pythonanywhere.com/" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    bilibili.pythonanywhere.com
+                </a>
+                <a href="https://fastapidemo.dark.net.cn" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    fastapidemo.dark.net.cn
+                </a>
+                <a href="https://daihuo.dark.net.cn" target="_blank" class="link-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    daihuo.dark.net.cn
+                </a>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 3rem; color: var(--text-secondary); font-size: 0.8rem;">
+            © 2026 程序员分享人生
+        </footer>
+    </div>
+</body>
+</html>
