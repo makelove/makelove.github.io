@@ -8,8 +8,9 @@ https://dark.net.cn/
 ## GitHub 仓库
 https://github.com/makelove
 
-排前的仓库repo
-
+### 排前的仓库repo
+- [淘宝客-淘宝联盟-阿里妈妈 topsdk](https://github.com/makelove/Taobao_topsdk)
+- [拼多多-多多客联盟 CPS 工具包](https://github.com/makelove/DDK_SDK)
 
 ## B站
 https://space.bilibili.com/180948619
